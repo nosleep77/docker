@@ -1,0 +1,46 @@
+
+docker system prune
+
+docker inspect <container id>
+docker logs <container id>
+
+docker stop <container id>
+docker kill <container id>
+
+docker build -t kubia .
+
+docker run --name kubia-container -p 8080:8080 -d kubia
+
+docker exec -it kubia-container bash
+
+docker inspect kubia-container
+
+docker exec -it kubia-container bash
+
+To push to docker hub, tag it with your dockerhub id
+docker tag kubia johnt035/kubia
+
+docker loginjohnt035 and passwd
+
+docker push johnt035/kubia
+
+docker run -p 8080:8080 -d johnt035/kubia
+
+To create image from container
+docker commit <container id>
+docker commit -c 'CMD ["redis-server"]' <container id>
+
+Build with specific dockerfile
+docker build -f Dockerfile.dev
+
+
+Mount local volume to container
+docker run -p 3000:3000 -v $(pwd):/app <container id>
+Take everything in pwd and map it into /app in the container
+If /app/node_modules doesn't exist
+docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app <container id>
+
+
+Run container - override default command
+docker run <container id> <command>
+docker run 0546542365841 npm run test
