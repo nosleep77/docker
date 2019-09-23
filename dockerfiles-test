@@ -1,0 +1,21 @@
+
+FROM node:alpine
+WORKDIR /app
+COPY package.json .
+RUN npm install
+COPY . .
+CMD ["npm", "start"]
+
+
+## redis without protected mode
+FROM alpine
+RUN apk add --update redis
+CMD [ "redis-server", "--protected-mode", "no" ]
+
+
+FROM node:7
+ADD app.js /app.js
+ENTRYPOINT ["node", "app.js"]
+
+
+
