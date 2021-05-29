@@ -11,6 +11,12 @@ def pig_it(s):
     else:
       pigSent = pigSent + " " + b
 
-  return pigSent
+  return pigSent.lstrip()
 
 print(pig_it('Hello world !'))
+
+## better version
+def pig_it(text):
+    lst = text.split()
+    return ' '.join( [word[1:] + word[:1] + 'ay' if word.isalpha() else word for word in lst])
+    
